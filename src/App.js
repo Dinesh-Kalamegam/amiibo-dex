@@ -9,7 +9,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [amiiboData, setAmiiboData] = useState(null)
   const [amiiLength, setAmiiLength] = useState(1)
-  const [page,setPage] = useState(1)
+  const [page, setPage] = useState(1)
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -36,7 +36,7 @@ function App() {
       <CssBaseline />
       <Paper >
         <Typography variant="h1">
-          {darkMode ? 'Dark Mode' : 'Light Mode'}
+          AmiiboDex
           <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
         </Typography>
         <Grid
@@ -44,14 +44,14 @@ function App() {
           direction="row"
           justifyContent="flex-start"
           alignItems="flex-start"
-          spacing={1}
-          pagination
+          flexWrap="wrap"
+          spacing={0}
         >
-          {amiiboData && amiiboData.slice(1+(10*(page-1)),10+(10*(page-1))).map(amiibo => (
+          {amiiboData && amiiboData.slice(1 + (10 * (page - 1)), 11 + (10 * (page - 1))).map(amiibo => (
             <AmiiboCard amiibo={amiibo} />
           ))}
         </Grid>
-        <Pagination count={Math.floor(amiiLength/10)} onChange={handlePageChange}/>
+        <Pagination count={Math.floor(amiiLength / 10)} onChange={handlePageChange} />
       </Paper>
     </ThemeProvider >
   );

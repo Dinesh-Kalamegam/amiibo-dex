@@ -5,15 +5,19 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { BorderColor } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 300,
+        width: 300,
     },
     media: {
-        height: 200,
-        paddingTop: '56.25%', // 16:9
+        height: 300,
+        // border:'solid 1px black',
+        // backgroundImage:{amiibo.image},
+        
+        
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -35,11 +39,31 @@ function AmiiboCard({ amiibo }) {
                 title={amiibo.name}
                 subheader={"EU Release : " + amiibo.release.eu}
             />
-            <CardMedia
+            {/* <CardMedia
                 className={classes.media}
                 image={amiibo.image}
                 title={amiibo.name}
-            />
+            /> */}
+            <div
+                style={
+                    {
+                        display:"flex",
+                        justifyContent:"center",
+                        alignItems:"center",
+                        width:"100%",
+                        height:"350px",
+                        textAlign:"center",
+                    }
+                }
+            >
+                <img 
+                src={amiibo.image}
+                style={{
+                    width:"200px"
+                }}
+                />
+            
+            </div>
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     Amiibo Series: {amiibo.amiiboSeries}

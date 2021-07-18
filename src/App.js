@@ -39,19 +39,31 @@ function App() {
           AmiiboDex
           <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
         </Typography>
-        <Grid
-          container
-          direction="row"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          flexWrap="wrap"
-          spacing={0}
+
+        <div
+          style={
+            {
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap:"wrap",
+              rowGap:"2rem",
+              columnGap:"2rem"
+            }
+          }
         >
           {amiiboData && amiiboData.slice(1 + (10 * (page - 1)), 11 + (10 * (page - 1))).map(amiibo => (
             <AmiiboCard amiibo={amiibo} />
           ))}
-        </Grid>
-        <Pagination count={Math.floor(amiiLength / 10)} onChange={handlePageChange} />
+        </div>
+
+        <Pagination
+          count={Math.floor(amiiLength / 10)}
+          onChange={handlePageChange}
+          showFirstButton
+          showLastButton
+        />
+
       </Paper>
     </ThemeProvider >
   );

@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
-import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { Paper, Switch, Typography, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { Pagination } from '@material-ui/lab';
 import axios from 'axios'
 import AmiiboCard from './components/AmiiboCard'
 
 
 const useStyles = makeStyles(() => ({
-  pageContent:{
-    padding:"2rem",
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"center",
-    alignItems:"center"
+  appTitle: {
+    padding: "2rem",
+    fontSize:"3rem",
+    textAlign:"center"
+  },
+  pageContent: {
+    padding: "2rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
 
   amiiboGrid: {
@@ -24,8 +29,8 @@ const useStyles = makeStyles(() => ({
     columnGap: "2rem"
   },
 
-  pagination:{
-    marginTop:"2rem"
+  pagination: {
+    marginTop: "2rem"
   }
 }));
 
@@ -56,7 +61,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Typography variant="h1">
+      <Typography variant="h1" className={classes.appTitle}>
         AmiiboDex
         <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
       </Typography>
@@ -64,17 +69,18 @@ function App() {
       <Paper className={classes.pageContent}>
         <div className={classes.amiiboGrid}>
           {
-            amiiboData && 
-            amiiboData.slice(1 + (numberOfResults * (page - 1)), (numberOfResults+1) + (numberOfResults * (page - 1))).map(amiibo => (
-            <AmiiboCard amiibo={amiibo} />
-          ))}
+            amiiboData &&
+            amiiboData
+              .slice(1 + (numberOfResults * (page - 1)), (numberOfResults + 1) + (numberOfResults * (page - 1)))
+              .map(amiibo => (<AmiiboCard amiibo={amiibo} />))
+          }
         </div>
 
         <Pagination
           className={classes.pagination}
           color="primary"
           count={Math.floor(amiiLength / numberOfResults)}
-          onChange={(event,value)=>setPage(value)}
+          onChange={(event, value) => setPage(value)}
           showFirstButton
           showLastButton
         />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, CardHeader, CardContent} from '@material-ui/core'
+import { Card, CardHeader, CardContent } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography';
 
 
@@ -20,6 +20,13 @@ const useStyles = makeStyles(() => ({
 
 function AmiiboCard({ amiibo }) {
     const classes = useStyles();
+    const info = {
+        "Amiibo Series": amiibo.amiiboSeries,
+        "Game Series": amiibo.gameSeries,
+        "Head": amiibo.head,
+        "Tail": amiibo.tail,
+        "Type": amiibo.type
+    }
     return (
         <Card className={classes.root}>
             <CardHeader
@@ -37,21 +44,14 @@ function AmiiboCard({ amiibo }) {
 
             </div>
             <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Amiibo Series: {amiibo.amiiboSeries}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Game Series: {amiibo.gameSeries}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Head: {amiibo.head}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Tail: {amiibo.tail}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Type: {amiibo.type}
-                </Typography>
+                {
+                    Object.entries(info).map(([k, v]) => (
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {k}: {v}
+                        </Typography>
+                    ))
+                }
+
             </CardContent>
 
         </Card>

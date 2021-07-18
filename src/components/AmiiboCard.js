@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(() => ({
     root: {
         width: 300,
+        height:600
     },
     amiiboCardImageContainer: {
         display: "flex",
@@ -15,6 +16,7 @@ const useStyles = makeStyles(() => ({
         width: "100%",
         height: "350px",
         textAlign: "center",
+        marginBottom:"1rem"
     }
 }));
 
@@ -31,7 +33,9 @@ function AmiiboCard({ amiibo }) {
         <Card className={classes.root}>
             <CardHeader
                 title={amiibo.name}
-                subheader={"EU Release : " + amiibo.release.eu}
+                subheader={
+                    amiibo.release.eu!=null ? "EU Release : " + amiibo.release.eu: "EU Release : Not Available "
+                }
             />
             <div className={classes.amiiboCardImageContainer}>
                 <img
@@ -46,7 +50,7 @@ function AmiiboCard({ amiibo }) {
             <CardContent>
                 {
                     Object.entries(info).map(([k, v]) => (
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography key={k} variant="body2" color="textSecondary" component="p">
                             {k}: {v}
                         </Typography>
                     ))

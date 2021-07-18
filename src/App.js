@@ -72,7 +72,7 @@ function App() {
             amiiboData &&
             amiiboData
               .slice(1 + (numberOfResults * (page - 1)), (numberOfResults + 1) + (numberOfResults * (page - 1)))
-              .map(amiibo => (<AmiiboCard amiibo={amiibo} />))
+              .map(amiibo => (<AmiiboCard key={amiibo.head+amiibo.tail} amiibo={amiibo} />))
           }
         </div>
 

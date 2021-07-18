@@ -1,19 +1,41 @@
 import { useState, useEffect } from 'react';
-import { createTheme } from '@material-ui/core/styles';
-import { Paper, Switch, Typography, ThemeProvider, CssBaseline, Grid } from '@material-ui/core';
+import { createTheme, makeStyles } from '@material-ui/core/styles';
+import { Paper, Switch, Typography, ThemeProvider, CssBaseline } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import axios from 'axios'
 import AmiiboCard from './components/AmiiboCard'
+
+
+const useStyles = makeStyles(() => ({
+  pageContent:{
+    padding:"2rem",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center"
+  },
+
+  amiiboGrid: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    rowGap: "2rem",
+    columnGap: "2rem"
+  },
+
+  pagination:{
+    marginTop:"2rem"
+  }
+}));
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [amiiboData, setAmiiboData] = useState(null)
   const [amiiLength, setAmiiLength] = useState(1)
   const [page, setPage] = useState(1)
-
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
+  const numberOfResults = 20
+  const classes = useStyles()
 
   const theme = createTheme({
     palette: {
@@ -34,32 +56,25 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Paper >
-        <Typography variant="h1">
-          AmiiboDex
-          <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-        </Typography>
+      <Typography variant="h1">
+        AmiiboDex
+        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+      </Typography>
 
-        <div
-          style={
-            {
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap:"wrap",
-              rowGap:"2rem",
-              columnGap:"2rem"
-            }
-          }
-        >
-          {amiiboData && amiiboData.slice(1 + (10 * (page - 1)), 11 + (10 * (page - 1))).map(amiibo => (
+      <Paper className={classes.pageContent}>
+        <div className={classes.amiiboGrid}>
+          {
+            amiiboData && 
+            amiiboData.slice(1 + (numberOfResults * (page - 1)), (numberOfResults+1) + (numberOfResults * (page - 1))).map(amiibo => (
             <AmiiboCard amiibo={amiibo} />
           ))}
         </div>
 
         <Pagination
-          count={Math.floor(amiiLength / 10)}
-          onChange={handlePageChange}
+          className={classes.pagination}
+          color="primary"
+          count={Math.floor(amiiLength / numberOfResults)}
+          onChange={(event,value)=>setPage(value)}
           showFirstButton
           showLastButton
         />

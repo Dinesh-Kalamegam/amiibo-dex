@@ -1,14 +1,20 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
+import {Card, CardHeader, CardContent} from '@material-ui/core'
 import Typography from '@material-ui/core/Typography';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         width: 300,
+    },
+    amiiboCardImageContainer: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "350px",
+        textAlign: "center",
     }
 }));
 
@@ -20,26 +26,15 @@ function AmiiboCard({ amiibo }) {
                 title={amiibo.name}
                 subheader={"EU Release : " + amiibo.release.eu}
             />
-            <div
-                style={
-                    {
-                        display:"flex",
-                        justifyContent:"center",
-                        alignItems:"center",
-                        width:"100%",
-                        height:"350px",
-                        textAlign:"center",
-                    }
-                }
-            >
-                <img 
-                alt={amiibo.name}
-                src={amiibo.image}
-                style={{
-                    width:"200px"
-                }}
+            <div className={classes.amiiboCardImageContainer}>
+                <img
+                    alt={amiibo.name}
+                    src={amiibo.image}
+                    style={{
+                        width: "200px"
+                    }}
                 />
-            
+
             </div>
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">

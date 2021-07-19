@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Paper, Switch, Typography, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { Paper, Switch, Typography, ThemeProvider, CssBaseline , CircularProgress } from '@material-ui/core';
 import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { Pagination } from '@material-ui/lab';
 import axios from 'axios'
 import AmiiboCard from './components/AmiiboCard'
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles(() => ({

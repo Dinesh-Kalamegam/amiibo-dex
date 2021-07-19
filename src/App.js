@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Paper, Switch, Typography, ThemeProvider, CssBaseline , CircularProgress } from '@material-ui/core';
+import { Paper, Switch, Typography, ThemeProvider, CssBaseline, CircularProgress } from '@material-ui/core';
 import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { Pagination } from '@material-ui/lab';
 import axios from 'axios'
@@ -9,8 +9,8 @@ import AmiiboCard from './components/AmiiboCard'
 const useStyles = makeStyles(() => ({
   appTitle: {
     padding: "2rem",
-    fontSize:"3rem",
-    textAlign:"center"
+    fontSize: "3rem",
+    textAlign: "center"
   },
   pageContent: {
     padding: "2rem",
@@ -70,9 +70,11 @@ function App() {
         <div className={classes.amiiboGrid}>
           {
             amiiboData ?
-            amiiboData
-              .slice(1 + (numberOfResults * (page - 1)), (numberOfResults + 1) + (numberOfResults * (page - 1)))
-              .map(amiibo => (<AmiiboCard key={amiibo.head+amiibo.tail} amiibo={amiibo} />)) : <CircularProgress color="secondary" />
+              amiiboData
+                .slice(1 + (numberOfResults * (page - 1)), (numberOfResults + 1) + (numberOfResults * (page - 1)))
+                .map(amiibo => (<AmiiboCard key={amiibo.head + amiibo.tail} amiibo={amiibo} />))
+              :
+              <CircularProgress color="secondary" />
           }
         </div>
 

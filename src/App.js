@@ -4,6 +4,7 @@ import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { Pagination } from '@material-ui/lab';
 import axios from 'axios'
 import AmiiboCard from './components/AmiiboCard'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles(() => ({
@@ -69,10 +70,10 @@ function App() {
       <Paper className={classes.pageContent}>
         <div className={classes.amiiboGrid}>
           {
-            amiiboData &&
+            amiiboData ?
             amiiboData
               .slice(1 + (numberOfResults * (page - 1)), (numberOfResults + 1) + (numberOfResults * (page - 1)))
-              .map(amiibo => (<AmiiboCard key={amiibo.head+amiibo.tail} amiibo={amiibo} />))
+              .map(amiibo => (<AmiiboCard key={amiibo.head+amiibo.tail} amiibo={amiibo} />)) : <CircularProgress color="secondary" />
           }
         </div>
 
